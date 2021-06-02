@@ -34,7 +34,6 @@ public class Main {
 
     static String[] deleteDuplicates(String str){
         String[] words = str.split(" ");
-
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
         for(String word : words){
             linkedHashSet.add(word);
@@ -42,15 +41,10 @@ public class Main {
         String[] strArray = new String[linkedHashSet.size()];
         linkedHashSet.toArray(strArray);
 
-        for(String wordFromArray : strArray){
-            System.out.println(wordFromArray);
-        }
         return strArray;
-
     }
 
-    static boolean areAnagram(String string1, String string2)
-    {
+    static boolean areAnagram(String string1, String string2) {
         string1 = string1.replaceAll("\\s", "").toLowerCase();
         string2 = string2.replaceAll("\\s", "").toLowerCase();
 
