@@ -3,6 +3,8 @@ package task_1;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,26 +22,32 @@ public class Main {
     }
 
     static int countAnagram(String str){
-        String[] temp = deleteDuplicates(str);
-        int count = 0;
-
-        for (int i = 0; i < temp.length; i++) {
-            for (int j = i + 1; j < temp.length; j++) {
-                if (areAnagram(temp[i], temp[j])) {
-                    // System.out.println(temp[i] + " is anagram of " + temp[j]); //test string
-                    count++;
-                }
-            }
+        if (str == null || str.isEmpty()) {
+            return 0;
         }
-        return count;
+
+        String[] temp = deleteDuplicates(str);
+        AtomicInteger count = new AtomicInteger();
+
+        IntStream.range(0,  temp.length).forEach(i -> {
+            IntStream.range(i + 1,  temp.length).forEach(j -> {
+                if (areAnagram(temp[i], temp[j])) {
+                    count.getAndIncrement();
+                }
+            });
+        });
+
+        return count.get();
     }
 
     static String[] deleteDuplicates(String str){
         String[] words = str.split(" ");
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
-        for(String word : words){
-            linkedHashSet.add(word);
-        }
+
+        IntStream.range(0,  words.length).forEach(i -> {
+            linkedHashSet.add(words[i]);
+        });
+
         String[] strArray = new String[linkedHashSet.size()];
         linkedHashSet.toArray(strArray);
 
