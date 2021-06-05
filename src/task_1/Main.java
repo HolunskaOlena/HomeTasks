@@ -16,11 +16,20 @@ public class Main {
         in.close();
     }
 
+    /**
+     * calls countAnagram method and output data
+     * @param str
+     */
     static void ArrayChallenge(String str){
         int result = countAnagram(str);
         System.out.println("Output: " + result);
     }
 
+    /**
+     * counts number of anagrams in string
+     * @param str
+     * @return count of anagrams
+     */
     static int countAnagram(String str){
         if (str == null || str.isEmpty()) {
             return 0;
@@ -40,6 +49,11 @@ public class Main {
         return count.get();
     }
 
+    /**
+     * deletes duplicates using LinkedHashMap
+     * @param str
+     * @return array of strings
+     */
     static String[] deleteDuplicates(String str){
         String[] words = str.split(" ");
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
@@ -54,6 +68,13 @@ public class Main {
         return strArray;
     }
 
+    /**
+     * changes all the characters in word into lowercase characters and
+     * checks if two words are anagrams
+     * @param string1
+     * @param string2
+     * @return boolean variable
+     */
     static boolean areAnagram(String string1, String string2) {
         string1 = string1.replaceAll("\\s", "").toLowerCase();
         string2 = string2.replaceAll("\\s", "").toLowerCase();
